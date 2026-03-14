@@ -1,0 +1,17 @@
+CONTRACT DETAILS
+================================
+Contract Address: 0xC875bCcF47303AeE182703d342A6E60Cd0e4465c
+Network: Ganache (Local)
+RPC URL: http://127.0.0.1:7545
+Account: 0x22dCc201afDC05849518d2767c4021d77b6EE5c4
+Deployment Block: 17
+Total Transactions Stored: 5
+
+TEST RESULTS
+================================
+Hashing: ✓ PASSED
+Store: ✓ PASSED
+Retrieve: ✓ PASSED
+Verify: ✓ PASSED
+Tamper Detection: ✓ PASSED
+Multiple Transactions: ✓ PASSED
