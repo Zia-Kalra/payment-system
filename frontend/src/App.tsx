@@ -4,8 +4,10 @@ import { AppRoutes } from './app/routes/AppRoutes'
 import { ErrorBoundary } from './components/system/ErrorBoundary'
 import { AuthProvider } from './state/auth/AuthProvider'
 import { ThemeProvider } from './state/theme/ThemeProvider'
+import { assertFrontendEnv } from './services/env'
 
 export default function App() {
+  assertFrontendEnv()
   return (
     <ErrorBoundary>
       <ThemeProvider>

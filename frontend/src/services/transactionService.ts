@@ -13,7 +13,10 @@ import {
 
 export async function listTransactions(input: ListTransactionsInput) {
   if (env.apiMock) return mockListTransactions(input)
-  const res = await apiClient.get('/transactions', { params: input })
+  const { from, ...rest } = input
+  const res = await apiClient.get('/transactions', {
+    params: { ...rest, ...(from ? { from_: from } : {}) },
+  })
   return res.data as Awaited<ReturnType<typeof mockListTransactions>>
 }
 
