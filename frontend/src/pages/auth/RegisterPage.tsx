@@ -67,7 +67,20 @@ export function RegisterPage() {
         onSubmit={async (e) => {
           e.preventDefault()
           setTouched(true)
-          if (!canSubmit) return
+          if (!canSubmit) {
+            const missing: string[] = []
+            if (!nameOk) missing.push('name')
+            if (!emailOk) missing.push('valid email')
+            if (!pwOk) missing.push('strong password')
+            if (!matchOk) missing.push('matching confirmation')
+            if (!terms) missing.push('terms acceptance')
+            toast.error(
+              missing.length
+                ? `Please provide: ${missing.join(', ')}.`
+                : 'Please complete the form.',
+            )
+            return
+          }
           setSubmitting(true)
           try {
             await register({ name, email, password })
@@ -190,7 +203,14 @@ export function RegisterPage() {
           </div>
         )}
 
-        <button className="btn-primary w-full" disabled={!canSubmit} type="submit">
+        <button
+          className={cn(
+            'btn-primary w-full',
+            !canSubmit && 'opacity-80 grayscale-[0.15]',
+          )}
+          aria-disabled={!canSubmit}
+          type="submit"
+        >
           {submitting ? (
             <>
               <Spinner />
@@ -200,6 +220,11 @@ export function RegisterPage() {
             'Register'
           )}
         </button>
+        {!canSubmit && (
+          <div className="text-center text-xs font-semibold text-slate-500 dark:text-slate-400">
+            Fill all required fields (and accept terms) to continue.
+          </div>
+        )}
 
         <div className="text-center text-sm font-semibold text-slate-600 dark:text-slate-300">
           Already have an account?{' '}
